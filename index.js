@@ -9,6 +9,7 @@ app.get('/', async (req, res) => {
 
     if (!authCode && code) {
         authCode = code
+        return res.sendFile(path.join(__dirname + '/tokens.html'))
         // fetch(
         //     'https://api.freshbooks.com/auth/oauth/token',
         //     {
