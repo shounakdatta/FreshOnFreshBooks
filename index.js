@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
     return res.sendFile(path.join(__dirname + '/authorize.html'))
 })
 
-app.get('/api/authorize', (req, res) => {
+app.get('/api/authorize/', (req, res) => {
     const uri = clientAuth.code.getUri()
     res.redirect(uri)
 })
