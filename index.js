@@ -31,10 +31,9 @@ app.get('/api/authorize/', (req, res) => {
 app.get('/api/tokens/', async (req, res) => {
     await clientAuth.code.getToken(req.originalUrl)
         .then(user => {
-            console.log("Test", user);
+            return res.send(JSON.stringify(user))
         })
-        .catch(err => console.log(err))
-    return res.sendFile(path.join(__dirname + '/success.html'))
+        .catch(err => res.send(JSON.stringify(err)))
 })
 
 
