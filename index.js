@@ -4,6 +4,8 @@ const path = require('path')
 const port = 4000
 
 app.get('/', async (req, res) => {
+    console.log(req.params);
+
     return res.sendFile(path.join(__dirname + '/index.html'))
 })
 
