@@ -9,7 +9,7 @@ app.get('/', async (req, res) => {
 
     if (!authCode && code) {
         authCode = code
-        const tokenObj = await fetch(
+        fetch(
             'https://api.freshbooks.com/auth/oauth/token',
             {
                 method: 'POST',
@@ -24,8 +24,10 @@ app.get('/', async (req, res) => {
                     redirect_uri: "https://node-on-freshbooks.herokuapp.com/"
                 })
             }
-        );
-        console.dir(tokenObj)
+        )
+            .then(res => res.json())
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
     }
     return res.sendFile(path.join(__dirname + '/authorize.html'))
 })
