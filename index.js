@@ -28,11 +28,12 @@ app.get('/api/authorize/', (req, res) => {
     res.redirect(uri)
 })
 
-app.get('/api/tokens/', (req, res) => {
-    clientAuth.code.getToken(req.originalUrl)
+app.get('/api/tokens/', async (req, res) => {
+    await clientAuth.code.getToken(req.originalUrl)
         .then(user => {
             console.log("Test", user);
         })
+        .catch(err => console.log(err))
     return res.sendFile(path.join(__dirname + '/success.html'))
 })
 
