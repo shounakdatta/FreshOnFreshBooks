@@ -4,6 +4,8 @@
 </button>
 <script>
     async function getTokens() {
+        const query = window.location.search.substring(1)
+        const token = query.split('code=')[1]
         fetch(
             'https://api.freshbooks.com/auth/oauth/token',
             {
