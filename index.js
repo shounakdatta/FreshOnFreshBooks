@@ -31,7 +31,7 @@ app.get('/api/authorize/', (req, res) => {
 app.get('/api/tokens/', (req, res) => {
     clientAuth.code.getToken(req.originalUrl)
         .then(user => {
-            console.log(user);
+            console.log("Test", user);
         })
     return res.sendFile(path.join(__dirname + '/success.html'))
 })
