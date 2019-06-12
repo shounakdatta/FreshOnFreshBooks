@@ -16,8 +16,10 @@ const clientAuth = new ClientOAuth2({
 
 app.get('/', (req, res) => {
     const { code } = req.query
-    console.log(code);
 
+    if (code) {
+        return res.sendFile(path.join(__dirname + '/tokens.html'))
+    }
     return res.sendFile(path.join(__dirname + '/authorize.html'))
 })
 
@@ -25,6 +27,15 @@ app.get('/api/authorize/', (req, res) => {
     const uri = clientAuth.code.getUri()
     res.redirect(uri)
 })
+
+app.get('/api/tokens/', (req, res) => {
+    clientAuth.code.getToken(req.originalUrl)
+        .then(user => {
+            console.log(user);
+        })
+    return res.sendFile(path.join(__dirname + '/success.html'))
+})
+
 
 app.listen(process.env.PORT || port, () => console.log(`Example app listening on port ${port}!`))
 
