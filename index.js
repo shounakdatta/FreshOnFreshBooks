@@ -15,7 +15,7 @@ const clientAuth = new ClientOAuth2({
 })
 
 app.get('/', (req, res) => {
-    const { code } = res.query
+    const { code } = req.query
     console.log(code);
 
     return res.sendFile(path.join(__dirname + '/authorize.html'))
