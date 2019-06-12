@@ -30,10 +30,8 @@ app.get('/api/authorize/', (req, res) => {
 
 app.get('/api/tokens/', async (req, res) => {
     await clientAuth.code.getToken(req.originalUrl)
-        .then(user => {
-            return res.send(JSON.stringify(user))
-        })
-        .catch(err => res.send(JSON.stringify(err)))
+        .then(user => res.send(JSON.stringify({ success: true, ...user })))
+        .catch(err => res.send(JSON.stringify({ success: false, ...err })))
 })
 
 
