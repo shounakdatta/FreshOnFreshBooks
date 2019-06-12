@@ -29,7 +29,7 @@ app.get('/api/authorize/', (req, res) => {
 })
 
 app.get('/api/tokens/', async (req, res) => {
-    console.dir("clientAuth");
+    console.log("clientAuth");
     const request = { ...req, query: { code: authCode } }
     await clientAuth.code.getToken(request)
         .then(user => res.send(JSON.stringify({ success: true, ...user })))
