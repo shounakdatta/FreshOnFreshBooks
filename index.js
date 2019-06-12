@@ -26,7 +26,7 @@ app.get('/', async (req, res) => {
                 })
             }
         )
-            .then(res => res.json())
+            .then(res => JSON.stringify(res.json()))
     }
     return res.sendFile(path.join(__dirname + '/authorize.html'))
 })
