@@ -14,13 +14,16 @@ const clientAuth = new ClientOAuth2({
     redirectUri: 'https://node-on-freshbooks.herokuapp.com/'
 })
 
-app.get('/', async (req, res) => {
-    const { code } = req.query
+app.get('/', (req, res) => {
+    const { code } = res.query
+    console.log(code);
 
-    if (!authCode && code) {
-        authCode = code
-    }
     return res.sendFile(path.join(__dirname + '/authorize.html'))
+})
+
+app.get('/api/authorize', (req, res) => {
+    const uri = clientAuth.code.getUri()
+    res.redirect(uri)
 })
 
 app.listen(process.env.PORT || port, () => console.log(`Example app listening on port ${port}!`))
