@@ -11,7 +11,7 @@ const clientAuth = new ClientOAuth2({
     clientSecret: '30aaf2abd5a8c70dd49bc1aff87743626c1c178b68e815d441669f64ab075832',
     accessTokenUri: 'https://api.freshbooks.com/auth/oauth/token',
     authorizationUri: 'https://my.freshbooks.com/service/auth/oauth/authorize',
-    redirectUri: 'https://api.freshbooks.com/auth/oauth/token'
+    redirectUri: 'https://node-on-freshbooks.herokuapp.com/'
 })
 
 app.get('/', (req, res) => {
