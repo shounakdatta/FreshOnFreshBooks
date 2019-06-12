@@ -18,6 +18,7 @@ app.get('/', (req, res) => {
     const { code } = req.query
 
     if (code) {
+        authCode = code
         return res.sendFile(path.join(__dirname + '/tokens.html'))
     }
     return res.sendFile(path.join(__dirname + '/authorize.html'))
