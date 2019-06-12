@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const path = require('path')
-const port = 4000
+const port = 5000
 let authCode = null
 
 const ClientOAuth2 = require('client-oauth2')
@@ -11,7 +11,7 @@ const clientAuth = new ClientOAuth2({
     clientSecret: '30aaf2abd5a8c70dd49bc1aff87743626c1c178b68e815d441669f64ab075832',
     accessTokenUri: 'https://api.freshbooks.com/auth/oauth/token',
     authorizationUri: 'https://my.freshbooks.com/service/auth/oauth/authorize',
-    redirectUri: 'https://node-on-freshbooks.herokuapp.com/'
+    redirectUri: 'http://localhost:5000/api/tokens'
 })
 
 app.get('/', (req, res) => {
@@ -29,7 +29,9 @@ app.get('/api/authorize/', (req, res) => {
 })
 
 app.get('/api/tokens/', async (req, res) => {
-    await clientAuth.code.getToken(req.originalUrl)
+    console.dir(clientAuth.code);
+    const request = { ...req, query: { code: authCode } }
+    await clientAuth.code.getToken(request)
         .then(user => res.send(JSON.stringify({ success: true, ...user })))
         .catch(err => res.send(JSON.stringify({ success: false, ...err })))
 })
