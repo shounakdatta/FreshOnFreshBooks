@@ -51,6 +51,8 @@ app.get('/api/tokens', async (req, res) => {
         }
     ).then(result => result.json())
 
+    console.log("access tokens: ", tokenObj.access_token);
+
     accountInfo = await fetch(
         accountInfoUri,
         {
