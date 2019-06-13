@@ -61,7 +61,7 @@ app.get('/api/tokens/', async (req, res) => {
     res.sendFile(path.join(__dirname + '/success.html'))
 })
 
-app.get('/api/showTokenData', (res, req) => {
+app.get('/api/showTokenData', (req, res) => {
     const { access_token, refresh_token } = tokenObj
     const data = "Access Token: " + access_token + "<br/>" +
         "Refresh Token: " + refresh_token
