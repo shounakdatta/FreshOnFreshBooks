@@ -9,7 +9,9 @@ Success!
             {
                 method: 'GET'
             }
-        ).then(res => document.getElementById('tokenData'))
+        ).then(res => {
+            document.getElementById('tokenData').innerHTML = res
+        })
     }
 
     document.addEventListener('DOMContentLoaded', getTokenData, false);
