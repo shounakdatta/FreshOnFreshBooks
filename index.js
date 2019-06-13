@@ -74,7 +74,7 @@ app.get('/api/showTokenData', (req, res) => {
     const { access_token, refresh_token } = tokenObj
     const { response } = accountInfo
     const data = {
-        accountId: response.id,
+        accountId: response.roles[0].id,
         accessToken: access_token,
         refreshToken: refresh_token
     }
