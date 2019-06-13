@@ -149,7 +149,7 @@ app.post('/api/createOtherIncome', async (req, res) => {
 })
 
 app.get('/api/getOtherIncomes', async (req, res) => {
-    const { roles } = accountInfo
+    const { response: { roles } } = accountInfo
     const uri = otherIncomeUri.replace('<accountid>', roles[0].accountid)
     const incomes = await fetch(
         uri,
