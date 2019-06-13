@@ -63,9 +63,11 @@ app.get('/api/tokens/', async (req, res) => {
 
 app.get('/api/showTokenData', (req, res) => {
     const { access_token, refresh_token } = tokenObj
-    const data = "Access Token: " + access_token + "<br/>" +
-        "Refresh Token: " + refresh_token
-    res.send(data)
+    const data = {
+        accessToken: access_token,
+        refreshToken: refresh_token
+    }
+    res.send(JSON.stringify(data))
 })
 
 
