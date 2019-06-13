@@ -8,9 +8,11 @@ const clientId = '4d9b451a98341639ac89b962529888e75000493c3776045af1864508f13429
 const clientSecret = '30aaf2abd5a8c70dd49bc1aff87743626c1c178b68e815d441669f64ab075832'
 const accessTokenUri = 'https://api.freshbooks.com/auth/oauth/token'
 const authorizationUri = 'https://my.freshbooks.com/service/auth/oauth/authorize'
+const accountInfoUri = 'https://api.freshbooks.com/auth/api/v1/users/me'
 const redirectUri = 'https://node-on-freshbooks.herokuapp.com/'
 let authCode = null
 let tokenObj = null
+let accountInfo = null
 
 app.get('/', (req, res) => {
     const { code } = req.query
@@ -48,12 +50,25 @@ app.get('/api/tokens', async (req, res) => {
             )
         }
     ).then(result => result.json())
+
+    accountInfo = await fetch(
+        accountInfoUri,
+        {
+            headers: {
+                'Authorization': tokenObj.access_token,
+                'Api-version': 'alpha',
+                'Content-Type': 'application/json'
+            }
+        }
+    ).then(result => result.json())
+
     res.sendFile(path.join(__dirname + '/success.html'))
 })
 
 app.get('/api/showTokenData', (req, res) => {
     const { access_token, refresh_token } = tokenObj
     const data = {
+        accountInfo: JSON.stringify(accountInfo),
         accessToken: access_token,
         refreshToken: refresh_token
     }
