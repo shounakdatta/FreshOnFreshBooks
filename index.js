@@ -106,7 +106,7 @@ app.get('/otherIncomeForm', (req, res) => {
 })
 
 app.post('/api/createOtherIncome', (req, res) => {
-    console.log(req.query);
+    console.log(req.body);
     res.sendFile(path.join(__dirname + '/otherIncomeForm.html'))
 })
 
