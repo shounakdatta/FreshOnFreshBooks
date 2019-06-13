@@ -58,7 +58,7 @@ app.get('/api/tokens/', async (req, res) => {
             )
         }
     ).then(result => result.json())
-    res.sendFile(path.join(__dirname + 'success.html'))
+    res.sendFile(path.join(__dirname + '/success.html'))
 })
 
 app.get('/api/showTokenData', (res, req) => {
