@@ -109,7 +109,7 @@ app.get('/otherIncomeForm', (req, res) => {
     res.sendFile(path.join(__dirname + '/otherIncomeForm.html'))
 })
 
-app.post('/api/createOtherIncome', (req, res) => {
+app.post('/api/createOtherIncome', async (req, res) => {
     const { response } = accountInfo
     const { amount, code, date } = req.body
     const newIncome = {
