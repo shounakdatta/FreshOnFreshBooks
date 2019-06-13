@@ -1,4 +1,18 @@
 <html>
 Success!
+<br>
+<div id="tokenData"></div>
+<script>
+    async function getTokenData() {
+        const data = await fetch(
+            '/api/getTokenData',
+            {
+                method: 'GET'
+            }
+        ).then(res => document.getElementById('tokenData').innerHTML(res))
+    }
+
+    document.addEventListener('DOMContentLoaded', getTokenData, false);
+</script>
 
 </html>

@@ -10,6 +10,7 @@ const accessTokenUri = 'https://api.freshbooks.com/auth/oauth/token'
 const authorizationUri = 'https://my.freshbooks.com/service/auth/oauth/authorize'
 const redirectUri = 'https://node-on-freshbooks.herokuapp.com/'
 let authCode = null
+let tokenObj = null
 
 // const ClientOAuth2 = require('client-oauth2')
 
@@ -38,7 +39,7 @@ app.get('/api/authorize/', (req, res) => {
 })
 
 app.get('/api/tokens/', async (req, res) => {
-    const tokenObj = await fetch(
+    tokenObj = await fetch(
         accessTokenUri,
         {
             method: 'POST',
@@ -56,15 +57,15 @@ app.get('/api/tokens/', async (req, res) => {
                 }
             )
         }
-    )
-        .then(result => result.json())
-    // .then(result => res.send(JSON.stringify(result)))
-    res.send(JSON.stringify(tokenObj))
-    // console.log("clientAuth");
-    // const request = { ...req, query: { code: authCode } }
-    // await clientAuth.code.getToken(request)
-    //     .then(user => res.send(JSON.stringify({ success: true, ...user })))
-    //     .catch(err => res.send(JSON.stringify({ success: false, ...err })))
+    ).then(result => result.json())
+    res.sendFile(path.join(__dirname + 'success.html'))
+})
+
+app.get('/api/showTokenData', (res, req) => {
+    const { access_token, refresh_token } = tokenObj
+    const data = "Access Token: " + access_token + "<br/>" +
+        "Refresh Token: " + refresh_token
+    res.send(data)
 })
 
 
