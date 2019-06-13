@@ -38,7 +38,7 @@ app.get('/api/authorize/', (req, res) => {
 })
 
 app.get('/api/tokens/', async (req, res) => {
-    const tokenObj = await fetch(
+    const tokenObj = fetch(
         accessTokenUri,
         {
             method: 'POST',
@@ -57,8 +57,8 @@ app.get('/api/tokens/', async (req, res) => {
             )
         }
     )
-    res.send(JSON.stringify(tokenObj.JSON()))
-
+        .then(result => result.json())
+        .then(result => res.send(JSON.stringify(result)))
     // console.log("clientAuth");
     // const request = { ...req, query: { code: authCode } }
     // await clientAuth.code.getToken(request)
