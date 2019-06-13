@@ -10,7 +10,7 @@ const accessTokenUri = 'https://api.freshbooks.com/auth/oauth/token'
 const authorizationUri = 'https://my.freshbooks.com/service/auth/oauth/authorize'
 const accountInfoUri = 'https://api.freshbooks.com/auth/api/v1/users/me'
 const redirectUri = 'https://node-on-freshbooks.herokuapp.com/'
-const createOtherIncomeUri = 'https://api.freshbooks.com/accounting/account/<accountid>/other_incomes/other_incomes'
+const otherIncomeUri = 'https://api.freshbooks.com/accounting/account/<accountid>/other_incomes/other_incomes'
 let authCode = null
 let tokenObj = null
 let accountInfo = null
@@ -133,7 +133,7 @@ app.post('/api/createOtherIncome', async (req, res) => {
             }
         ]
     }
-    const uri = createOtherIncomeUri.replace('<accountid>', response.id)
+    const uri = otherIncomeUri.replace('<accountid>', response.id)
     const submittedIncome = await fetch(
         uri,
         {
@@ -145,7 +145,23 @@ app.post('/api/createOtherIncome', async (req, res) => {
             body: JSON.stringify({ other_income: newIncome })
         }
     ).then(res => res.json)
-    res.send(submittedIncome)
+    res.sendFile(path.join(__dirname + '/success.html'))
+})
+
+app.get('/api/getOtherIncomes', async (req, res) => {
+    const { response } = accountInfo
+    const uri = otherIncomeUri.replace('<accountid>', response.id)
+    const incomes = await fetch(
+        uri,
+        {
+            method: 'GET',
+            headers: {
+                'Api-version': 'alpha',
+                'Content-Type': 'application/json'
+            }
+        }
+    )
+    res.send(incomes)
 })
 
 
