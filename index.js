@@ -103,5 +103,9 @@ app.get('/api/refreshTokens', async (req, res) => {
     res.sendFile(path.join(__dirname + '/success.html'))
 })
 
+app.get('/createOtherIncome', (req, res) => {
+    res.sendFile(path.join(__dirname + '/createOtherIncome.html'))
+})
+
 
 app.listen(process.env.PORT || port, () => console.log(`Example app listening on port ${port}!`))
