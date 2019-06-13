@@ -38,7 +38,7 @@ app.get('/api/authorize/', (req, res) => {
 })
 
 app.get('/api/tokens/', async (req, res) => {
-    const tokenObj = fetch(
+    const tokenObj = await fetch(
         accessTokenUri,
         {
             method: 'POST',
