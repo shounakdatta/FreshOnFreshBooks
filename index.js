@@ -33,7 +33,7 @@ app.get('/', (req, res) => {
 
 app.get('/api/authorize/', (req, res) => {
     let uri = authorizationUri + "?client_id=" + clientId +
-        "&redirect_uri=" + redirectUri + "scope=&response_type=code&state="
+        "&redirect_uri=" + redirectUri + "&scope=&response_type=code&state="
     res.redirect(uri)
 })
 
