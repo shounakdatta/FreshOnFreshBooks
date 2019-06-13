@@ -38,6 +38,25 @@ app.get('/api/authorize/', (req, res) => {
 })
 
 app.get('/api/tokens/', async (req, res) => {
+    fetch(
+        accessTokenUri,
+        {
+            method: 'POST',
+            headers: {
+                'Api-version': 'alpha',
+                'Content-Type': 'application/json'
+            },
+            body: {
+                'grant_type': 'authorization_code',
+                'client_secret': clientSecret,
+                'code': authCode,
+                'client_id': clientId,
+                'redirect_uri': redirectUri
+            }
+        }
+    )
+        .then(result => result.json())
+        .then(result => res.send(JSON.stringify(result)))
     // console.log("clientAuth");
     // const request = { ...req, query: { code: authCode } }
     // await clientAuth.code.getToken(request)
