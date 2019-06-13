@@ -14,6 +14,9 @@ let authCode = null
 let tokenObj = null
 let accountInfo = null
 
+app.use(express.json());       // to support JSON-encoded bodies
+app.use(express.urlencoded()); // to support URL-encoded bodies
+
 app.get('/', (req, res) => {
     const { code } = req.query
 
@@ -107,7 +110,7 @@ app.get('/otherIncomeForm', (req, res) => {
 
 app.post('/api/createOtherIncome', (req, res) => {
     console.log(req.body);
-    res.sendFile(path.join(__dirname + '/otherIncomeForm.html'))
+    res.send(req.body)
 })
 
 
