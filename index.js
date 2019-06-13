@@ -51,13 +51,14 @@ app.get('/api/tokens', async (req, res) => {
         }
     ).then(result => result.json())
 
-    console.log("access tokens: ", tokenObj.access_token);
+    const { token_type, accessToken } = tokenObj;
+    console.log("access tokens: ", access_token);
 
     accountInfo = await fetch(
         accountInfoUri,
         {
             headers: {
-                'Authorization': tokenObj.access_token,
+                'Authorization': "Bearer" + " " + access_token,
                 'Api-version': 'alpha',
                 'Content-Type': 'application/json'
             }
