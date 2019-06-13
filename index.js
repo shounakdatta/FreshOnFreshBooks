@@ -46,13 +46,15 @@ app.get('/api/tokens/', async (req, res) => {
                 'Api-version': 'alpha',
                 'Content-Type': 'application/json'
             },
-            body: {
-                'grant_type': 'authorization_code',
-                'client_secret': clientSecret,
-                'code': authCode,
-                'client_id': clientId,
-                'redirect_uri': redirectUri
-            }
+            body: JSON.stringify(
+                {
+                    'grant_type': 'authorization_code',
+                    'client_secret': clientSecret,
+                    'code': authCode,
+                    'client_id': clientId,
+                    'redirect_uri': redirectUri
+                }
+            )
         }
     )
         .then(result => result.json())
