@@ -17,9 +17,9 @@ Success!
             }
         )
             .then(res => res.json())
-            .then(({ accessToken, accountInfo, refreshToken }) => {
+            .then(({ accessToken, accountId, refreshToken }) => {
                 document.getElementById('tokenData').innerHTML =
-                    "Account ID: " + JSON.stringfy(accountInfo).response.id + "<br/>" +
+                    "Account ID: " + accountId + "<br/>" +
                     "Access Token: " + accessToken + "<br/>" +
                     "Refresh Token: " + refreshToken
             })

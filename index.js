@@ -70,8 +70,9 @@ app.get('/api/tokens', async (req, res) => {
 
 app.get('/api/showTokenData', (req, res) => {
     const { access_token, refresh_token } = tokenObj
+    const { response } = accountInfo
     const data = {
-        accountInfo: JSON.stringify(accountInfo),
+        accountId: response.id,
         accessToken: access_token,
         refreshToken: refresh_token
     }
