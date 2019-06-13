@@ -151,11 +151,13 @@ app.post('/api/createOtherIncome', async (req, res) => {
 app.get('/api/getOtherIncomes', async (req, res) => {
     const { response: { roles } } = accountInfo
     const uri = otherIncomeUri.replace('<accountid>', roles[0].accountid)
+    const { token_type, access_token } = tokenObj;
     const incomes = await fetch(
         uri,
         {
             method: 'GET',
             headers: {
+                'Authorization': "Bearer" + " " + access_token,
                 'Api-version': 'alpha',
                 'Content-Type': 'application/json'
             }
