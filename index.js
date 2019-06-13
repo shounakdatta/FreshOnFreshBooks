@@ -52,8 +52,6 @@ app.get('/api/tokens', async (req, res) => {
     ).then(result => result.json())
 
     const { token_type, access_token } = tokenObj;
-    console.log("access tokens: ", access_token);
-
     accountInfo = await fetch(
         accountInfoUri,
         {
@@ -103,8 +101,13 @@ app.get('/api/refreshTokens', async (req, res) => {
     res.sendFile(path.join(__dirname + '/success.html'))
 })
 
-app.get('/createOtherIncome', (req, res) => {
-    res.sendFile(path.join(__dirname + '/createOtherIncome.html'))
+app.get('/otherIncomeForm', (req, res) => {
+    res.sendFile(path.join(__dirname + '/otherIncomeForm.html'))
+})
+
+app.get('/api/createOtherIncome', (req, res) => {
+    console.log(req.query);
+    res.sendFile(path.join(__dirname + '/otherIncomeForm.html'))
 })
 
 
