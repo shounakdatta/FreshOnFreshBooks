@@ -51,7 +51,7 @@ app.get('/api/tokens', async (req, res) => {
         }
     ).then(result => result.json())
 
-    const { token_type, accessToken } = tokenObj;
+    const { token_type, access_token } = tokenObj;
     console.log("access tokens: ", access_token);
 
     accountInfo = await fetch(
