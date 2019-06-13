@@ -10,6 +10,7 @@ const accessTokenUri = 'https://api.freshbooks.com/auth/oauth/token'
 const authorizationUri = 'https://my.freshbooks.com/service/auth/oauth/authorize'
 const accountInfoUri = 'https://api.freshbooks.com/auth/api/v1/users/me'
 const redirectUri = 'https://node-on-freshbooks.herokuapp.com/'
+const createOtherIncomeUri = 'https://api.freshbooks.com/accounting/account/<accountid>/other_incomes/other_incomes'
 let authCode = null
 let tokenObj = null
 let accountInfo = null
@@ -109,8 +110,42 @@ app.get('/otherIncomeForm', (req, res) => {
 })
 
 app.post('/api/createOtherIncome', (req, res) => {
-    console.log(req.body);
-    res.send(req.body)
+    const { response } = accountInfo
+    const { amount, code, date } = req.body
+    const newIncome = {
+        "amount": {
+            amount,
+            code
+        },
+        "category_name": "online_sales",
+        date,
+        "note": "Han Solo portrait",
+        "payment_type": "PayPal",
+        "source": "Etsy",
+        "taxes": [
+            {
+                "amount": "3",
+                "name": "HST"
+            },
+            {
+                "amount": "10",
+                "name": "Empire Tax"
+            }
+        ]
+    }
+    const uri = createOtherIncomeUri.replace('<accountid>', response.id)
+    const submittedIncome = await fetch(
+        uri,
+        {
+            method: 'POST',
+            headers: {
+                'Api-version': 'alpha',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ other_income: newIncome })
+        }
+    ).then(res => res.json)
+    res.send(submittedIncome)
 })
 
 
