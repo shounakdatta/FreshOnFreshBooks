@@ -110,7 +110,7 @@ app.get('/otherIncomeForm', (req, res) => {
 })
 
 app.post('/api/createOtherIncome', async (req, res) => {
-    const { response } = accountInfo
+    const { roles } = accountInfo
     const { amount, code, date } = req.body
     const newIncome = {
         "amount": {
@@ -133,7 +133,7 @@ app.post('/api/createOtherIncome', async (req, res) => {
             }
         ]
     }
-    const uri = otherIncomeUri.replace('<accountid>', response.id)
+    const uri = otherIncomeUri.replace('<accountid>', roles[0].accountid)
     const submittedIncome = await fetch(
         uri,
         {
@@ -149,8 +149,8 @@ app.post('/api/createOtherIncome', async (req, res) => {
 })
 
 app.get('/api/getOtherIncomes', async (req, res) => {
-    const { response } = accountInfo
-    const uri = otherIncomeUri.replace('<accountid>', response.id)
+    const { roles } = accountInfo
+    const uri = otherIncomeUri.replace('<accountid>', roles[0].accountid)
     const incomes = await fetch(
         uri,
         {
