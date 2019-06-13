@@ -10,7 +10,7 @@ Success!
                 method: 'GET'
             }
         ).then(res => {
-            console.log(res.body);
+            console.log(res.JSON());
             document.getElementById('tokenData').innerHTML = res
         })
     }
