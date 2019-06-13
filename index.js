@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const path = require('path')
-const port = 5000
+const port = 5001
 const fetch = require('node-fetch')
 
 const clientId = '4d9b451a98341639ac89b962529888e75000493c3776045af1864508f1342901'
@@ -111,6 +111,7 @@ app.get('/otherIncomeForm', (req, res) => {
 
 app.post('/api/createOtherIncome', async (req, res) => {
     const { roles } = accountInfo
+    console.dir(accountInfo)
     const { amount, code, date } = req.body
     const newIncome = {
         "amount": {
