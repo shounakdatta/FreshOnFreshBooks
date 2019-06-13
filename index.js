@@ -74,7 +74,7 @@ app.get('/api/refreshTokens', async (req, res) => {
                 {
                     'grant_type': 'refresh_token',
                     'client_secret': clientSecret,
-                    'refresh_token': refreshToken,
+                    'refresh_token': refresh_token,
                     'client_id': clientId,
                     'redirect_uri': redirectUri
                 }
