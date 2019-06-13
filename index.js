@@ -58,7 +58,8 @@ app.get('/api/tokens/', async (req, res) => {
         }
     )
         .then(result => result.json())
-        .then(result => res.send(JSON.stringify(result)))
+    // .then(result => res.send(JSON.stringify(result)))
+    res.send(JSON.stringify(tokenObj))
     // console.log("clientAuth");
     // const request = { ...req, query: { code: authCode } }
     // await clientAuth.code.getToken(request)
