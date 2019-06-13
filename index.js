@@ -47,5 +47,3 @@ app.get('/api/tokens/', async (req, res) => {
 
 
 app.listen(process.env.PORT || port, () => console.log(`Example app listening on port ${port}!`))
-
-module.exports = clientAuth;
