@@ -112,6 +112,7 @@ app.get('/otherIncomeForm', (req, res) => {
 app.post('/api/createOtherIncome', async (req, res) => {
     const { response: { roles } } = accountInfo
     const { amount, code, date } = req.body
+    const { token_type, access_token } = tokenObj;
     const newIncome = {
         "amount": {
             amount,
@@ -139,6 +140,7 @@ app.post('/api/createOtherIncome', async (req, res) => {
         {
             method: 'POST',
             headers: {
+                'Authorization': "Bearer" + " " + access_token,
                 'Api-version': 'alpha',
                 'Content-Type': 'application/json'
             },
