@@ -11,9 +11,10 @@ Success!
             }
         )
             .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                document.getElementById('tokenData').innerHTML = data
+            .then(({ accessToken, refreshToken }) => {
+                document.getElementById('tokenData').innerHTML =
+                    "Access Token: " + accessToken + "<br/>" +
+                    "Refresh Token: " + refreshToken
             })
     }
 
