@@ -1,7 +1,13 @@
 <html>
 Success!
-<br>
+<br />
 <div id="tokenData"></div>
+<br />
+<a href="/api/refreshTokens">
+    <button>
+        Refresh Tokens
+    </button>
+</a>
 <script>
     async function getTokenData() {
         const data = await fetch(

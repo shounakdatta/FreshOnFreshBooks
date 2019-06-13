@@ -28,7 +28,7 @@ app.get('/api/authorize/', (req, res) => {
     res.redirect(uri)
 })
 
-app.get('/api/tokens/', async (req, res) => {
+app.get('/api/tokens', async (req, res) => {
     tokenObj = await fetch(
         accessTokenUri,
         {
@@ -58,6 +58,30 @@ app.get('/api/showTokenData', (req, res) => {
         refreshToken: refresh_token
     }
     res.send(JSON.stringify(data))
+})
+
+app.get('/api/refreshTokens', async (req, res) => {
+    const { refresh_token } = tokenObj
+    tokenObj = await fetch(
+        accessTokenUri,
+        {
+            method: 'POST',
+            headers: {
+                'Api-version': 'alpha',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(
+                {
+                    'grant_type': 'refresh_token',
+                    'client_secret': clientSecret,
+                    'refresh_token': refreshToken,
+                    'client_id': clientId,
+                    'redirect_uri': redirectUri
+                }
+            )
+        }
+    ).then(result => result.json())
+    res.sendFile(path.join(__dirname + '/success.html'))
 })
 
 
