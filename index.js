@@ -111,7 +111,7 @@ app.get('/otherIncomeForm', (req, res) => {
 
 app.post('/api/createOtherIncome', async (req, res) => {
     const { roles } = accountInfo
-    console.dir(accountInfo)
+    console.dir(accountInfo.roles)
     const { amount, code, date } = req.body
     const newIncome = {
         "amount": {
