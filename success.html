@@ -9,10 +9,12 @@ Success!
             {
                 method: 'GET'
             }
-        ).then(res => {
-            console.log(res.json());
-            document.getElementById('tokenData').innerHTML = res
-        })
+        )
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                document.getElementById('tokenData').innerHTML = data
+            })
     }
 
     document.addEventListener('DOMContentLoaded', getTokenData, false);
