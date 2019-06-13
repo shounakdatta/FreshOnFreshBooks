@@ -101,7 +101,7 @@ app.get('/api/refreshTokens', async (req, res) => {
     res.sendFile(path.join(__dirname + '/success.html'))
 })
 
-app.get('/otherIncomeForm', (req, res) => {
+app.post('/otherIncomeForm', (req, res) => {
     res.sendFile(path.join(__dirname + '/otherIncomeForm.html'))
 })
 
