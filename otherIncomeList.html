@@ -15,7 +15,7 @@
                 method: 'GET'
             }
         ).then(res => res.json())
-        console.log(data);
+        console.log(JSON.stringify(data));
 
         const { response: { result: { other_incomes } } } = data;
         console.log(other_incomes);
