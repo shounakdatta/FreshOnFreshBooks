@@ -172,7 +172,7 @@ app.get('/api/getOtherIncomes', async (req, res) => {
     res.send(incomes)
 })
 
-app.get('/api/deleteOtherIncome', (req, res) => {
+app.get('/api/deleteOtherIncome', async (req, res) => {
     const { id } = req.query
     const uri = otherIncomeUri
         .replace('<accountid>', roles[0].accountid)
