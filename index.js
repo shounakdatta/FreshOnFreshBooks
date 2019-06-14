@@ -147,7 +147,7 @@ app.post('/api/createOtherIncome', async (req, res) => {
             body: JSON.stringify({ other_income: newIncome })
         }
     ).then(res => res.json())
-    res.redirect(path.join(__dirname + '/success.html'))
+    res.redirect(path.join(__dirname + '/menu'))
 })
 
 app.get('/getOtherIncomes', (req, res) => {
