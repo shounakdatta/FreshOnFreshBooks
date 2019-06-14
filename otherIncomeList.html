@@ -2,6 +2,7 @@
 <h3>Other Incomes List</h3>
 <table id="otherIncomesTable">
     <tr>
+        <th>ID</th>
         <th>Amount</th>
         <th>Currency</th>
         <th>Date</th>
@@ -15,10 +16,29 @@
                 method: 'GET'
             }
         ).then(res => res.json())
-        console.log(JSON.stringify(data));
 
         const { response: { result: { other_income } } } = data;
-        console.log(other_income);
+        const table = document.getElementById('otherIncomesTable')
+        other_income.forEach(income => {
+            const {
+                amount: { amount, code },
+                incomeid,
+                date
+            } = income;
+            const rowData = {
+                incomeid,
+                amount,
+                code,
+                date
+            }
+            const row = document.createElement('tr')
+            Object.values(rowData).forEach(key => {
+                const cell = document.createElement('th')
+                cell.innerText = key
+                row.appendChild(cell)
+            });
+            table.appendChild(row)
+        });
 
     }
 
