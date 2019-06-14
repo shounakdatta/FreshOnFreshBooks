@@ -55,7 +55,9 @@
             const btn = document.createElement('button')
             btn.innerText = "Delete"
             link.href = "/api/deleteOtherIncome?id=" + incomeid
-            row.appendChild(cell.appendChild(link.appendChild(btn)))
+            link.appendChild(btn)
+            cell.appendChild(link)
+            row.appendChild(cell)
             table.appendChild(row)
         });
 
