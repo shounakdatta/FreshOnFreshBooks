@@ -147,11 +147,11 @@ app.post('/api/createOtherIncome', async (req, res) => {
             body: JSON.stringify({ other_income: newIncome })
         }
     ).then(res => res.json())
-    res.sendFile(path.join(__dirname + '/success.html'))
+    res.redirect(req.baseUrl + '/menu')
 })
 
 app.get('/getOtherIncomes', (req, res) => {
-    res.redirect(req.baseUrl + '/menu')
+    res.sendFile(path.join(__dirname + '/otherIncomeList.html'))
 })
 
 app.get('/api/getOtherIncomes', async (req, res) => {
