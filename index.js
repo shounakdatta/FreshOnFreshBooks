@@ -34,39 +34,39 @@ app.get('/api/authorize/', (req, res) => {
     res.redirect(uri)
 })
 
-app.get('/api/tokens', async (req, res) => {
-    tokenObj = await fetch(
-        accessTokenUri,
-        {
-            method: 'POST',
-            headers: {
-                'Api-version': 'alpha',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(
-                {
-                    'grant_type': 'authorization_code',
-                    'client_secret': clientSecret,
-                    'code': authCode,
-                    'client_id': clientId,
-                    'redirect_uri': redirectUri
-                }
-            )
-        }
-    ).then(result => result.json())
-
-    const { token_type, access_token } = tokenObj;
-    accountInfo = await fetch(
-        accountInfoUri,
-        {
-            headers: {
-                'Authorization': "Bearer" + " " + access_token,
-                'Api-version': 'alpha',
-                'Content-Type': 'application/json'
+app.get('/menu', async (req, res) => {
+    if (tokenObj === null) {
+        tokenObj = await fetch(
+            accessTokenUri,
+            {
+                method: 'POST',
+                headers: {
+                    'Api-version': 'alpha',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(
+                    {
+                        'grant_type': 'authorization_code',
+                        'client_secret': clientSecret,
+                        'code': authCode,
+                        'client_id': clientId,
+                        'redirect_uri': redirectUri
+                    }
+                )
             }
-        }
-    ).then(result => result.json())
-
+        ).then(result => result.json())
+        const { token_type, access_token } = tokenObj;
+        accountInfo = await fetch(
+            accountInfoUri,
+            {
+                headers: {
+                    'Authorization': "Bearer" + " " + access_token,
+                    'Api-version': 'alpha',
+                    'Content-Type': 'application/json'
+                }
+            }
+        ).then(result => result.json())
+    }
     res.sendFile(path.join(__dirname + '/success.html'))
 })
 
