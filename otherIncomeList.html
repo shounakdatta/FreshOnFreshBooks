@@ -1,0 +1,24 @@
+<html>
+<h3>Other Incomes List</h3>
+<table id="otherIncomesTable">
+    <tr>
+        <th>Amount</th>
+        <th>Currency</th>
+        <th>Date</th>
+    </tr>
+</table>
+<script>
+    async function getList() {
+        const data = await fetch(
+            '/api/getOtherIncomes',
+            {
+                method: 'GET'
+            }
+        ).then(res => res.json)
+        const { result: { other_incomes } } = data;
+        console.log(other_incomes);
+
+    }
+</script>
+
+</html>

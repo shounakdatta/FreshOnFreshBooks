@@ -150,6 +150,10 @@ app.post('/api/createOtherIncome', async (req, res) => {
     res.send(submittedIncome)
 })
 
+app.get('/getOtherIncomes', (req, res) => {
+    res.sendFile(path.join(__dirname + '/otherIncomeList.html'))
+})
+
 app.get('/api/getOtherIncomes', async (req, res) => {
     const { response: { roles } } = accountInfo
     const uri = otherIncomeUri.replace('<accountid>', roles[0].accountid)
