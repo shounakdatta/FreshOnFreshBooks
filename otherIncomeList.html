@@ -6,6 +6,7 @@
         <th>Amount</th>
         <th>Currency</th>
         <th>Date</th>
+        <th>Actions</th>
     </tr>
     <br />
 </table>
@@ -49,6 +50,12 @@
                 cell.innerText = key
                 row.appendChild(cell)
             });
+            const cell = document.createElement('th')
+            const link = document.createElement('a')
+            const btn = document.createElement('button')
+            btn.innerText = "Delete"
+            link.href = "/api/deleteOtherIncome?id=" + incomeid
+            row.appendChild(cell.appendChild(link.appendChild(btn)))
             table.appendChild(row)
         });
 

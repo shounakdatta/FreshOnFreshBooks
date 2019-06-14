@@ -157,7 +157,7 @@ app.get('/getOtherIncomes', (req, res) => {
 app.get('/api/getOtherIncomes', async (req, res) => {
     const { response: { roles } } = accountInfo
     const uri = otherIncomeUri.replace('<accountid>', roles[0].accountid)
-    const { token_type, access_token } = tokenObj;
+    const { access_token } = tokenObj
     const incomes = await fetch(
         uri,
         {
@@ -172,5 +172,24 @@ app.get('/api/getOtherIncomes', async (req, res) => {
     res.send(incomes)
 })
 
+app.get('/api/deleteOtherIncome', (req, res) => {
+    const { id } = req.query
+    const uri = otherIncomeUri
+        .replace('<accountid>', roles[0].accountid)
+        + '/' + id
+    const { access_token } = tokenObj
+    await fetch(
+        uri,
+        {
+            method: 'DELETE',
+            headers: {
+                'Authorization': "Bearer" + " " + access_token,
+                'Api-version': 'alpha',
+                'Content-Type': 'application/json'
+            }
+        }
+    )
+    res.redirect(req.baseUrl + '/getOtherIncomes')
+})
 
 app.listen(process.env.PORT || port, () => console.log(`Example app listening on port ${port}!`))
