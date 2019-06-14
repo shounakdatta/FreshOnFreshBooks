@@ -14,10 +14,10 @@
             {
                 method: 'GET'
             }
-        ).then(res => res.json().response)
+        ).then(res => res.json())
         console.log(data);
 
-        const { result: { other_incomes } } = data;
+        const { response: { result: { other_incomes } } } = data;
         console.log(other_incomes);
 
     }
