@@ -151,7 +151,7 @@ app.post('/api/createOtherIncome', async (req, res) => {
 })
 
 app.get('/getOtherIncomes', (req, res) => {
-    res.sendFile(path.join(__dirname + '/otherIncomeList.html'))
+    res.redirect(req.baseUrl + '/menu')
 })
 
 app.get('/api/getOtherIncomes', async (req, res) => {
